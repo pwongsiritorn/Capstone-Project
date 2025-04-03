@@ -48,7 +48,7 @@ def transform_aqi_data():
         "temperature": weather["tp"],
         "humidity": weather["hu"],
         #"pm2_5": pollution.get("pm25", None)
-        #"pm2_5": pollution.get("p2", None)
+        #"pm2_5": pollution.get("p2", None) 
     }
 
     with open(DATA_FILE, "w") as f:
@@ -94,10 +94,10 @@ def load_to_postgres():
 
 # --------- DAG ---------
 with DAG(
-    "weater2_api_day",  # 
+    "weather2_api_dag",  # 
     start_date=timezone.datetime(2025, 2, 1),
     schedule="0 */3 * * *",   
-    catchup=False,
+    catchup=True,
     tags=["dpu", "capstone", "aqi"],
 ) as dag:
 
