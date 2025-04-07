@@ -58,4 +58,31 @@ plt.ylabel("AQI")
 plt.grid(True)
 st.pyplot(plt)
 
+# -------------------- Business Insights --------------------
+st.header("Business Questions Insights")
+
+# 1.วันที่ AQI สูงสุด
+max_aqi_row = df.loc[df['aqi'].idxmax()]
+st.write(f"วันที่ค่า AQI สูงสุด: **{max_aqi_row['timestamp'].date()}** (AQI = {max_aqi_row['aqi']})")
+
+# 2. ค่าความชื้นเฉลี่ย
+avg_humidity = df['humidity'].mean()
+st.write(f"ค่าความชื้นเฉลี่ย: **{avg_humidity:.2f}%**")
+
+# 3. ค่า AQI เฉลี่ยรายวัน
+st.subheader("ค่า AQI เฉลี่ยรายวัน")
+df_daily_avg = df.groupby(df['timestamp'].dt.date)['aqi'].mean().reset_index()
+df_daily_avg.columns = ['date', 'avg_aqi']
+st.line_chart(df_daily_avg.set_index('date'))
+
+# 4. อุณหภูมิสูงสุด
+max_temp = df['temperature'].max()
+st.write(f"อุณหภูมิสูงสุด: **{max_temp}°C**")
+
+# 5. จำนวนวันที่ AQI > 80
+df_high_aqi_days = df[df['aqi'] > 80]
+num_high_aqi_days = df_high_aqi_days['timestamp'].dt.date.nunique()
+st.write(f"จำนวนวันที่ AQI > 80: **{num_high_aqi_days} วัน**")
+
+
 conn.close()

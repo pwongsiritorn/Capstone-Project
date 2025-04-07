@@ -77,6 +77,7 @@ x-airflow-common:
     AIRFLOW__SMTP__SMTP_STARTTLS: 'false'
     AIRFLOW__SMTP__SMTP_SSL: 'false'
     AIRFLOW__SMTP__SMTP_PORT: 1025
+    #AIRFLOW__CORE__DEFAULT_TIMEZONE: Asia/Bangkok
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
