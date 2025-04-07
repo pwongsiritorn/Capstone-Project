@@ -97,7 +97,7 @@ with DAG(
     "weather2_api_dag",  # 
     start_date=timezone.datetime(2025, 2, 1),
     schedule="0 */3 * * *",   
-    catchup=True,
+    catchup=False,
     tags=["dpu", "capstone", "aqi"],
 ) as dag:
 
